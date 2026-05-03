@@ -58,6 +58,88 @@ const fadeObserver = new IntersectionObserver(entries => {
 
 fadeEls.forEach(el => fadeObserver.observe(el));
 
+/* ── Beyond the Classroom card stack ── */
+
+document.addEventListener('DOMContentLoaded', () => {
+  (function () {
+    const cards = [...document.querySelectorAll('.flashcard')];
+    if (!cards.length) return;
+
+    let topIndex = 0;
+
+    function updateStack() {
+      const total = cards.length;
+      cards.forEach((card, i) => {
+        const pos = (i - topIndex + total) % total;
+        card.setAttribute('data-pos', Math.min(pos, 5));
+        if (pos !== 0) card.classList.remove('flipped');
+      });
+
+      const counter = document.getElementById('beyondCounter');
+      if (counter) counter.textContent = `${topIndex + 1} / ${cards.length}`;
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        if (card.getAttribute('data-pos') === '0') {
+          card.classList.toggle('flipped');
+        }
+      });
+    });
+
+    document.getElementById('beyondNext')?.addEventListener('click', () => {
+      cards[topIndex].classList.remove('flipped');
+      topIndex = (topIndex + 1) % cards.length;
+      updateStack();
+    });
+
+    document.getElementById('beyondPrev')?.addEventListener('click', () => {
+      cards[topIndex].classList.remove('flipped');
+      topIndex = (topIndex - 1 + cards.length) % cards.length;
+      updateStack();
+    });
+
+    updateStack();
+  })();
+});
+
+// (function () {
+//   const cards = [...document.querySelectorAll('.flashcard')];
+//   if (!cards.length) return;
+//   let topIndex = 0;
+
+//   function updateStack() {
+//     const total = cards.length;
+//     cards.forEach((card, i) => {
+//       const pos = (i - topIndex + total) % total;
+//       card.setAttribute('data-pos', Math.min(pos, 5));
+//       if (pos !== 0) card.classList.remove('flipped');
+//     });
+//     const counter = document.getElementById('beyondCounter');
+//     if (counter) counter.textContent = `${topIndex + 1} / ${cards.length}`;
+//   }
+
+//   cards.forEach(card => {
+//     card.addEventListener('click', () => {
+//       if (card.getAttribute('data-pos') === '0') card.classList.toggle('flipped');
+//     });
+//   });
+
+//   document.getElementById('beyondNext')?.addEventListener('click', () => {
+//     cards[topIndex].classList.remove('flipped');
+//     topIndex = (topIndex + 1) % cards.length;
+//     updateStack();
+//   });
+
+//   document.getElementById('beyondPrev')?.addEventListener('click', () => {
+//     cards[topIndex].classList.remove('flipped');
+//     topIndex = (topIndex - 1 + cards.length) % cards.length;
+//     updateStack();
+//   });
+
+//   updateStack();
+// })();
+
 /* ── Contact form (client-side only — wire to a backend/Formspree) ── */
 const form = document.getElementById('contactForm');
 if (form) {
