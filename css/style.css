@@ -140,7 +140,6 @@ h2 { font-family: var(--f-display); font-weight: 400; font-size: 34px; margin: 0
 .entry { padding: 4px 0 34px; }
 .entry h3 { font-family: var(--f-body); font-weight: 600; font-size: 22px; line-height: 1.35; margin: 0 0 4px; }
 .meta { font-size: 17px; color: var(--ink-soft); font-style: italic; margin-bottom: 8px; }
-.status { font: 500 11.5px var(--f-sans); font-style: normal; letter-spacing: .12em; text-transform: uppercase; color: var(--earth); border: 1px solid currentColor; border-radius: 3px; padding: 1px 6px; margin-left: 8px; vertical-align: 2px; white-space: nowrap; }
 .entry p { margin-bottom: 6px; font-size: 19px; }
 .tags { font: 400 14.5px var(--f-sans); color: var(--ink-faint); letter-spacing: .02em; }
 .tags span + span::before { content: " · "; }
