@@ -35,7 +35,7 @@
 
 /* ───────── Base ───────── */
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
 body {
   margin: 0;
   background: var(--paper);
@@ -51,7 +51,8 @@ p { margin: 0 0 1em; }
 .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
 
 /* ───────── Masthead ───────── */
-.masthead { border-bottom: 3px double var(--rule); }
+.masthead { position: sticky; top: 0; z-index: 40; border-bottom: 3px double var(--rule); background: var(--paper); background: color-mix(in srgb, var(--paper) 90%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: box-shadow .25s, background .3s; }
+.masthead.scrolled { box-shadow: 0 6px 18px rgba(22, 26, 38, .08); }
 .masthead .wrap { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-top: 18px; padding-bottom: 12px; flex-wrap: wrap; }
 .masthead .brand { font-family: var(--f-display); font-size: 20px; color: var(--ink); background: none; }
 .masthead nav { display: flex; gap: 22px; flex-wrap: wrap; align-items: baseline; }
@@ -213,7 +214,11 @@ footer .wrap { padding-top: 22px; padding-bottom: 40px; display: flex; justify-c
 @media (max-width: 560px) {
   body { font-size: 18px; }
   .wrap { padding: 0 16px; }
-  .masthead nav { gap: 14px; }
+  html { scroll-padding-top: 92px; }
+  .masthead .wrap { gap: 4px; padding-top: 12px; padding-bottom: 8px; }
+  .masthead nav { gap: 14px; flex-wrap: nowrap; overflow-x: auto; max-width: 100%; padding-bottom: 2px; scrollbar-width: none; }
+  .masthead nav::-webkit-scrollbar { display: none; }
+  .masthead nav a, .theme-btn { flex-shrink: 0; }
   .title-block { padding: 48px 0 36px; }
   .cv { grid-template-columns: 1fr; }
   .cv-date { padding: 0 0 2px; }

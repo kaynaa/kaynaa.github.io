@@ -13,3 +13,12 @@
     label();
   });
 })();
+
+// Subtle shadow on the sticky header once the page scrolls
+(function () {
+  const head = document.querySelector('.masthead');
+  if (!head) return;
+  const onScroll = () => head.classList.toggle('scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
