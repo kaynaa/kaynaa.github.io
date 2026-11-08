@@ -13,21 +13,3 @@
     label();
   });
 })();
-
-// Index-card deck
-(function () {
-  const cards = [...document.querySelectorAll('#deck .card')];
-  let top = 0;
-  const render = () => {
-    cards.forEach((c, i) => {
-      const pos = (i - top + cards.length) % cards.length;
-      c.dataset.pos = Math.min(pos, 5);
-      if (pos !== 0) c.classList.remove('flipped');
-    });
-    document.getElementById('count').textContent = `${top + 1} / ${cards.length}`;
-  };
-  cards.forEach(c => c.addEventListener('click', () => { if (c.dataset.pos === '0') c.classList.toggle('flipped'); }));
-  document.getElementById('next').onclick = () => { top = (top + 1) % cards.length; render(); };
-  document.getElementById('prev').onclick = () => { top = (top - 1 + cards.length) % cards.length; render(); };
-  render();
-})();
